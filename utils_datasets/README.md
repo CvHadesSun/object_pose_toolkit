@@ -13,10 +13,10 @@ contains some files,among them,[textured.obj] and [points.xyz] contains
 ## 0000[for example]
 In this folder,a sample include 4 files(label,anntation,rgb,depth)
 
-###label
-In label image,per object is masking by it's object class number.
+### label
+In *-label.png image,per object is masking by it's object class number.
 The class indexes are rearrange in 1~21 by orinal order.we can use
-this label to get the masks of one sample
+this label to get the masks of one sample.
 
 ### Annotation format
 The *-meta.mat file in the YCB-Video dataset contains the following fields:
