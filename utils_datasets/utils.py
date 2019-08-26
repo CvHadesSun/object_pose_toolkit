@@ -11,6 +11,30 @@ import numpy as np
 
 # ann=mat.loadmat('000001-meta.mat')
 
+# 
+cls_colors=np.array([[255, 255, 255],
+                    [255, 0, 0],
+                    [0, 255, 0],
+                    [0, 0, 255],
+                    [255, 255,0],
+                    [255, 0, 255], 
+                    [0, 255, 255],
+                [   128, 0, 0], 
+                    [0, 128, 0], 
+                    [0, 0, 128], 
+                    [128, 128, 0], 
+                    [128, 0, 128],
+                    [0, 128, 128],
+                    [64, 0, 0], 
+                    [0, 64, 0], 
+                    [0, 0, 64], 
+                    [64, 64, 0],
+                    [64, 0, 64],
+                    [0, 64, 64], 
+                    [192, 0, 0],
+                    [0, 192, 0], 
+                    [0, 0, 192]],dtype=np.uint8)
+
 def Visual3DModel(pts,bbox):
 
     #visualize the 3D model of a object by points cloud
@@ -164,7 +188,7 @@ def ReadObjFile(file_path):
 
 def load_ply(path):
   """Loads a 3D mesh model from a PLY file.
-  Copyright (c) 2019 Tomas Hodan
+
   :param path: Path to a PLY file.
   :return: The loaded model given by a dictionary with items:
    - 'pts' (nx3 ndarray)
@@ -345,4 +369,85 @@ def load_ply(path):
   f.close()
 
   return model     
-  
+
+  def Corner3DBbox(pts):
+    #from the points coordinates get 3d model 8 corners of object
+    #return (x,y,z) the positive coordinate
+    #return w,h,d
+
+    x,y,z=np.max(pts,axis=0)
+
+    xm,ym,zm=np.min(pts,axis=0)
+
+
+    #w
+    w=x-xm
+    #h
+    h=y-ym
+    #d
+    d=z-zm
+
+    return [x,y,y],w,h,d
+
+def TransTo8P(xyz,w,h,d):
+    #transform the xyz,w,h,d to coordinates of 8 corners 
+    #return the 8 corners' coordinates 
+    corners3D=np.zeros((8,3),dtype=np.float)
+    x,y,z=xyz[0],xyz[1],xyz[2]
+    corners3D[0,:]=x,y,z
+    corners3D[1,:]=x,y,z-d
+    corners3D[2,:]=x,y-h,z
+    corners3D[3,:]=x,y-h,z-d
+    corners3D[4,:]=x-w,y,z
+    corners3D[5,:]=x-w,y,z-d
+    corners3D[6,:]=x-w,y-h,z
+    corners3D[7,:]=x-w,y-h,z-d
+
+    return corners3D
+
+
+  def GetR_TInfo(file):
+    #read the R|t infomattion from the .txt rotation file in occluded-linemod dataset
+    #return matrix of the R|T ground truth
+    #return image_size
+    #return obj_size
+
+    R_t=np.zeros((3,4),dtype=np.float) 
+    # T_=np.eye(4,dtype=np.float)
+
+    fp = open(file,'r')
+    line=fp.readline()
+    line=line.rstrip('\n').rstrip('\r')
+    
+    while True:
+        # print(type(line))
+        line=str(line)
+        if line.startswith('image'):
+            line=fp.readline()
+            line=line.rstrip().split()
+            image_size=(float(line[0]),float(line[1]))
+        elif line.startswith('rotation'):
+            for i in range(3):
+                line=fp.readline()
+                line=line.rstrip().split()
+                R_t[i,:-1]=line[:]
+        elif line.startswith('center'):
+            line=fp.readline()
+            line=line.rstrip().split()
+            R_t[:,-1]=line[:]
+            
+
+        elif line.startswith('extend'):
+            line=fp.readline()
+            line=line.rstrip().split()
+            obj_size=(float(line[0]),float(line[1]),float(line[2]))    
+            break
+
+        else:
+            line=fp.readline()
+
+    fp.close()
+    # R_t[-1,-1]= 1
+    
+    return R_t,image_size,obj_size
+
