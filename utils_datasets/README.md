@@ -5,16 +5,16 @@ You can get a complete tool in (http://bop.felk.cvut.cz).
 (https://github.com/yuxng/YCB_Video_toolbox)
 
 
-##model
+## model
 There are 21 objects in models folder,and in per subfolder,one model
 contains some files,among them,[textured.obj] and [points.xyz] contains
 3d model point cloud datas.
 
-##0000[for example]
+## 0000[for example]
 In this folder,a sample include 5 files(label,anntation,rgb,depth,and bbox .txt file)
 
-###label
-In label image,per object is masking by it's object class number.
+### label
+In *-label.png image,per object is masking by it's object class number.
 The class indexes are rearrange in 1~21 by orinal order.we can use
 this label to get the masks of one sample
 
