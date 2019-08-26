@@ -49,5 +49,5 @@ it contains the all rgb and depth images of samples.
 ## pose
 Crossponding to the rgb images filenames,it gives the pose ground truth.
 
-##models
+## models
 There are 8 obejcts and per object includes 2 3d model info[.xyz,.obj] files.
