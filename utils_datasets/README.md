@@ -5,20 +5,20 @@ You can get a complete tool in (http://bop.felk.cvut.cz).
 (https://github.com/yuxng/YCB_Video_toolbox)
 
 
-## model
+ ## model
 There are 21 objects in models folder,and in per subfolder,one model
 contains some files,among them,[textured.obj] and [points.xyz] contains
 3d model point cloud datas.
 
-## 0000[for example]
+ ## 0000[for example]
 In this folder,a sample include 4 files(label,anntation,rgb,depth)
 
-### label
+  ### label
 In *-label.png image,per object is masking by it's object class number.
 The class indexes are rearrange in 1~21 by orinal order.we can use
 this label to get the masks of one sample.
 
-### Annotation format
+  ### Annotation format
 The *-meta.mat file in the YCB-Video dataset contains the following fields:
 - center: 2D location of the projection of the 3D model origin in the image
 - cls_indexes: class labels of the objects
