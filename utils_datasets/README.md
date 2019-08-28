@@ -41,10 +41,10 @@ The Occlusion Dataset is a reannotation of the benchvise segment of the LINEMOD 
 All objects are now annotated instead of simply the benchvise. You're likely to find 
 more info here (https://hci.iwr.uni-heidelberg.de/vislearn/iccv2015-occlusion-challenge/)
 
-it format like ycb-video dataset.Include 3 subfolder.
+it's format like ycb-video dataset.Include 3 subfolder.
 
 ## RGB-D
-it contains the all rgb and depth images of samples.
+it includes the all rgb and depth images of samples.
 
 ## pose
 Crossponding to the rgb images filenames,it gives the pose ground truth.
