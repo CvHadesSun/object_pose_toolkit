@@ -128,7 +128,7 @@ class COCO_M(object):
         poses=ann['poses']
         # print(poses.shape)
         cam_k=ann['intrinsic_matrix']
-        cc=np.array([i for i in range(1,9)]).reshape(8,1)
+        cc=np.array([2]*8).reshape(8,1)
         
         for ii,item in enumerate(_ids):
             item_data=[]
